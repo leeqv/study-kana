@@ -1,0 +1,127 @@
+{% extends "lessons/layout_main.html" %}
+
+{% block title %}
+    About
+{% endblock %}
+
+{% block main %}
+<section class="about__content">
+    <header>
+        <span class="o-site-logo big-logo about__content__logo"><i class="fa fa-book"></i></span>
+        <span class="about__content__title-text">Study Kana: Gojūon</span>
+    </header>
+    
+    <p class="about__content__description">Study Kana: Gojūon is a web app to learn the 46 basic letters (gojūon) of katakana and hiragana.</p>
+    <a href="{% url 'register' %}" role="button" class="about__content__link-to-registration">
+        <span class="btn btn-primary">Start learning now</span>
+    </a>
+
+    <div class="scroll-indicator visible-indicator" id="scroll-indicator">
+        ⬇ scroll ⬇
+    </div>
+</section>
+
+<section class="about__snippets">
+    <div>
+        <header>
+            Learn Hiragana
+        </header>
+
+        <video class="js-snippet-video snippet-small-screen" width="350px" muted poster="{{ MEDIA_URL }}images/about/small-screen/thumbnails/small-01-learn-hiragana.png">
+            <source src="{{ MEDIA_URL }}images/about/small-screen/videos/small-01-learn-hiragana.mp4" type="video/mp4">
+        </video>    
+
+        <video class="js-snippet-video snippet-wide-screen" width="500px" muted poster="{{ MEDIA_URL }}images/about/wide-screen/thumbnails/wide-01-learn-hiragana.png">
+            <source src="{{ MEDIA_URL }}images/about/wide-screen/videos/wide-01-learn-hiragana.mp4" type="video/mp4">
+        </video>
+
+        <div class="js-snippet-play-icon video-play-icon">▶</div>
+    </div>
+
+    <div>
+        <header>
+            Learn Katakana
+        </header>
+
+        <video class="js-snippet-video snippet-small-screen" width="350px" muted poster="{{ MEDIA_URL }}images/about/small-screen/thumbnails/small-02-learn-katakana.png">
+            <source src="{{ MEDIA_URL }}images/about/small-screen/videos/small-02-learn-katakana.mp4" type="video/mp4">
+        </video>    
+
+        <video class="js-snippet-video snippet-wide-screen" width="500px" muted poster="{{ MEDIA_URL }}images/about/wide-screen/thumbnails/wide-01-learn-katakana.png">
+            <source src="{{ MEDIA_URL }}images/about/wide-screen/videos/wide-02-learn-katakana.mp4" type="video/mp4">
+        </video>
+
+        <div class="js-snippet-play-icon video-play-icon">▶</div>
+    </div>
+
+    <div>
+        <header>
+            Review Lessons
+        </header>
+
+        <video class="js-snippet-video snippet-small-screen" width="350px" muted poster="{{ MEDIA_URL }}images/about/small-screen/thumbnails/small-03-review.png">
+            <source src="{{ MEDIA_URL }}images/about/small-screen/videos/small-03-review.mp4" type="video/mp4">
+        </video>    
+
+        <video class="js-snippet-video snippet-wide-screen" width="500px" muted poster="{{ MEDIA_URL }}images/about/wide-screen/thumbnails/wide-03-review.png">
+            <source src="{{ MEDIA_URL }}images/about/wide-screen/videos/wide-03-review.mp4" type="video/mp4">
+        </video>
+
+        <div class="js-snippet-play-icon video-play-icon">▶</div>   
+    </div>
+
+    <div>
+        <header>
+            Create Watchlist
+        </header>
+
+        <video class="js-snippet-video snippet-small-screen" width="350px" muted poster="{{ MEDIA_URL }}images/about/small-screen/thumbnails/small-04-watchlist.png">
+            <source src="{{ MEDIA_URL }}images/about/small-screen/videos/small-04-watchlist.mp4" type="video/mp4">
+        </video>    
+
+        <video class="js-snippet-video snippet-wide-screen" width="500px" muted poster="{{ MEDIA_URL }}images/about/wide-screen/thumbnails/wide-04-watchlist.png">
+            <source src="{{ MEDIA_URL }}images/about/wide-screen/videos/wide-04-watchlist.mp4" type="video/mp4">
+        </video>
+
+        <div class="js-snippet-play-icon video-play-icon">▶</div>        
+    </div>
+
+    <div>
+        <header>
+            Take Quizzes
+        </header>
+
+        <video class="js-snippet-video snippet-small-screen" width="350px" muted poster="{{ MEDIA_URL }}images/about/small-screen/thumbnails/small-05-quiz.png">
+            <source src="{{ MEDIA_URL }}images/about/small-screen/videos/small-05-quiz.mp4" type="video/mp4">
+        </video>    
+
+        <video class="js-snippet-video snippet-wide-screen" width="500px" muted poster="{{ MEDIA_URL }}images/about/wide-screen/thumbnails/wide-05-quiz.png">
+            <source src="{{ MEDIA_URL }}images/about/wide-screen/videos/wide-05-quiz.mp4" type="video/mp4">
+        </video>
+
+        <div class="js-snippet-play-icon video-play-icon">▶</div>
+    </div>
+
+    <div>
+        <header>
+            See progress
+        </header>
+
+        <video class="js-snippet-video snippet-small-screen" width="350px" muted poster="{{ MEDIA_URL }}images/about/small-screen/thumbnails/small-06-see-progress.png">
+            <source src="{{ MEDIA_URL }}images/about/small-screen/videos/small-06-see-progress.mp4" type="video/mp4">
+        </video>    
+
+        <video class="js-snippet-video snippet-wide-screen" width="500px" muted poster="{{ MEDIA_URL }}images/about/wide-screen/thumbnails/wide-06-see-progress.png">
+            <source src="{{ MEDIA_URL }}images/about/wide-screen/videos/wide-06-see-progress.mp4" type="video/mp4">
+        </video>
+
+        <div class="js-snippet-play-icon video-play-icon">▶</div>
+    </div>
+</section>
+
+<footer class="about__footer">
+    <header>Credits</header>
+    <p>All kana and stroke order images are from Wikipedia (via Wikimedia Commons).</p>
+    <p>Lessons were created with the help of Jisho Japanese-English dictionary (<a href="https://jisho.org/">jisho.org</a>)</p>
+</footer>
+{% endblock %}

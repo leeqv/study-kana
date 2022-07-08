@@ -1,0 +1,60 @@
+{% extends "lessons/layout_menu.html" %}
+
+{% block title %}
+    Study
+{% endblock %}
+
+{% block header_text %}
+    Let's Study
+{% endblock %} 
+
+{% block content %}
+
+{% for course in lessonsDict %}
+    <section class="c-card--menu c-card--menu--study" role="button">
+        <div class="o-index-card-container">
+            <div class="o-index-card o-index-card--below"></div>
+            <div class="o-index-card o-index-card--below"></div>
+            <div class="o-index-card o-index-card--below"></div>
+            <main class="o-index-card o-index-card--top">
+                <header class="c-card--menu__header">
+                    {{ course.0 }}
+                </header>
+            
+                <p class="c-card--menu__content small-text">
+                {% if course.1 %}
+                    LESSON {{ course.1.order }}:
+                    
+                    {% if course.1.name != 'Vowels' %}
+                    <span class="big-text u-text-stroke u-text-shadow c-card--menu__content__groupname" role="text">
+                        {{ course.1.name.0 }}
+                    </span>
+                    {% else %}
+                    <span class="medium-text u-text-stroke u-text-shadow c-card--menu__content__groupname" role="text">
+                        {{ course.1.name }}
+                    </span>
+                    {% endif %}
+                    
+                    group
+                </p>
+
+                <a href="/study/{{ course.0.0 }}-{{ course.1.order }}">
+                    <button class="c-card--menu__link-to-lesson o-btn--arrow" title="Proceed to {{ course.0 }} lesson {{ course.1.order }}">
+                        <div class="o-btn--arrow__text">Study</div>
+                        <div class="o-btn--arrow__icon"></div>
+                        <div class="o-btn--arrow__tip"></div>
+                    </button>
+                </a>
+                {% else %}
+                    <p class="c-card--menu__content small-text c-card__done-text">
+                        <span class="medium-text u-text-stroke u-text-shadow" role="text">Done</span>
+                        <span>😄👍</span>
+                    </p>
+                {% endif %}
+            </main>
+            <div class="c-card--menu__paper-clip o-paper-clip"></div>
+        </div>
+    </section>
+{% endfor %}
+
+{% endblock %}

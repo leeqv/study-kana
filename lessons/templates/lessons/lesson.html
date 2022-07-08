@@ -1,0 +1,154 @@
+{% extends "lessons/layout_main.html" %}
+{% load custom_tags %}
+
+{% block title %}
+    {{ letter.lesson.name }}
+{% endblock %}
+
+{% block main %}
+<main class="section--lesson">
+    <div class="o-index-card-container">
+        <div class="c-card--letter o-index-card">
+            <nav>
+                <header>{{ letter.lesson.name }}</header>
+                <table> 
+                    <tr>
+                        {% for item in letter.lesson.get_letters %}
+                            {% if item.kana == letter.kana %}
+                                <td>
+                                    <a href="/study/{{ kana }}-{{ letter.lesson.order }}/{{ item.romaji }}" role="button" class="o-btn--round">
+                                        {{ item.kana }}
+                                    </a>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <a href="/study/{{ kana }}-{{ letter.lesson.order }}/{{ item.romaji }}" role="button" class="o-btn--round">
+                                        {{ item.kana }}
+                                    </a>
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+        
+                        <!-- Option for /study to start quiz on menu -->
+                        {% with request.path|slice:6 as path %}
+                            {% if path == "/study" %}
+                            <td>
+                                <button id="sure2quiz-prompt" class="o-btn--round" title="Start quiz" type="button" ><i class="fa fa-file-text-o"></i></button>
+                            </td>
+                            {% endif %}
+                        {% endwith %}
+        
+                    </tr>
+                </table>
+            </nav>
+
+            <button data-letter="{{ letter.kana }}" class="c-card--letter__watchlist-btn o-sticky-note js-watchlist-btn" type="button">
+                <div class="o-btn--sticky-note">
+                    <div class="o-btn--sticky-note__paper"></div>
+                    <div class="o-btn--sticky-note__flipped-part"></div>
+                    {% if in_watchlist %}
+                        <span id="js-watchlist-btn-text" title="Remove from watchlist">Remove</span>
+                    {% else %}
+                        <span id="js-watchlist-btn-text" title="Add to watchlist">Add</span>
+                    {% endif %}
+                </div>
+            </button>
+
+            <main>
+                <section class="c-card--letter__letter">
+                    <img class="img-kana" src="{{ letter.kana_img.url }}" />
+                    <p> {{ letter.romaji }} </p>
+                </section>
+                
+                <section class="c-card--letter__infos">
+                    <p class="ex-emoji"> {{ letter.ex_emoji }} </p>
+                    {{ letter.ex_english|lower }}
+                    {% spaceless %}
+                    <p>
+                        {% with letter.ex_romaji|index:letter.romaji as array %}
+                            (
+                            {% for i in letter.ex_romaji|lower %}
+                                {% if forloop.counter0 in array %}
+                                    <span class="u-highlighted-text">{{ i }}</span>
+                                {% else %}
+                                    <span>{{ i }}</span>
+                                {% endif %}
+                            {% endfor %}
+                            )
+                        {% endwith %}
+                    </p>
+                    {% endspaceless %}
+                    {% spaceless %}
+                    <p>
+                        {% for syllable in letter.ex_kana %}
+                
+                            {% if syllable == letter.kana %}
+                                <span class="u-highlighted-text">{{ syllable }}</span>
+                            {% else %}
+                                <span>{{ syllable }}</span>
+                            {% endif %}
+                
+                        {% endfor %}
+                    </p>
+                    {% endspaceless %}
+                    <button type="button" id="showStrokeBtn" class="c-card--letter__stroke-btn o-btn"> 
+                        Show stroke order <i class="fa fa-caret-square-o-down"></i>
+                    </button>
+                    <button type="button" id="hideStrokeBtn" class="c-card--letter__stroke-btn o-btn u-hidden"> 
+                        Hide stroke order <i class="fa fa-caret-square-o-up"></i> 
+                    </button>
+
+                    <img id="js-stroke-order-img" class="c-card--letter__infos__stroke-order u-transparent" src="{{ letter.strokeorder_img.url }}" />
+                </section>
+            </main>
+        </div>
+    
+        <!-- Prev letter BTN -->
+        {% if letter.order != 1 %}
+        {% with letter.order|add:"-2" as index_start and letter.order|add:"-1" as index_end %}
+            {% with index_start|addstr:":"|addstr:index_end as prev_letter_slice %}
+            
+            <a href="/study/{{ kana }}-{{ letter.lesson.order }}/{{ lesson_letters|slice:prev_letter_slice|join:'' }}/">
+                <button class="c-card--lesson__prev-letter-btn o-btn--arrow o-btn--arrow--left" title="See previous letter">
+                    <div class="o-btn--arrow__text">Prev</div>
+                    <div class="o-btn--arrow__icon"></div>
+                    <div class="o-btn--arrow__tip"></div>
+                </button>
+            </a>
+            {% endwith %}
+        {% endwith %}
+        {% endif %}
+    
+        <!-- Next letter BTN -->
+        {% with request.path|slice:6 as path %}
+            {% if letter.order != lesson_letters|length %}
+                {% with letter.order|add:"1" as index_end %}
+                    {% with letter.order|addstr:":"|addstr:index_end as next_letter_slice %}
+                        <a href="/study/{{ kana }}-{{ letter.lesson.order }}/{{ lesson_letters|slice:next_letter_slice|join:'' }}/">
+                            <button class="c-card--lesson__next-letter-btn o-btn--arrow" title="See next letter">
+                                <div class="o-btn--arrow__text">Next</div>
+                                <div class="o-btn--arrow__icon"></div>
+                                <div class="o-btn--arrow__tip"></div>
+                            </button>
+                        </a>
+                    {% endwith %}
+                {% endwith %}
+            <!-- For /study only -->
+            {% elif path == "/study" %}
+                <a href="/study/{{ kana }}-{{ letter.lesson.order }}/fin">
+                    <button class="c-card--lesson__next-letter-btn o-btn--arrow" title="See next letter">
+                        <div class="o-btn--arrow__text">Next</div>
+                        <div class="o-btn--arrow__icon"></div>
+                        <div class="o-btn--arrow__tip"></div>
+                    </button>
+                </a>
+                
+            {% endif %}
+        {% endwith %}
+        
+    </div>
+
+
+</main>
+
+{% endblock %}

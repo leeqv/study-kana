@@ -1,0 +1,60 @@
+.o-paper-clip {
+    background-image: url('http://www.clker.com/cliparts/N/8/t/1/F/d/paper-clip-hi.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: all ease 0.5s;
+}
+
+.o-progress {
+    &-container {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &-bar {
+        -webkit-appearance: none;
+        appearance: none;
+        border-radius: 0.25rem;
+    
+        &::-moz-progress-bar {
+            border-radius: inherit;
+            background: pink;
+        }
+    
+        &--fallback {
+            height: 1.75rem;
+            background-color: white;
+            border-radius: 0.25rem;
+            display: inline-block;
+            width: 190px;
+            position: relative;
+        
+            &__bar {
+                border-radius: inherit;
+                height: inherit;
+                background: orange;
+                display: inline-block;
+                position: absolute;
+                left: 0;
+            }
+        }
+    }
+
+    &-text {
+        position: absolute;
+        top: 0;
+        right: 0.5rem;
+        opacity: .35;
+    }
+}
+
+.o-site-logo {
+    font-size: 1.5rem;
+    border: 2px solid white;
+    text-align: center;
+    line-height: 1.5rem;
+    padding: 0.75rem;
+    background: linear-gradient(to right bottom, #0093e9, #00a2e7, #00afe1, #17bad8, #4fc4cf, #5bc6d2, #65c9d4, #6fcbd7, #6dc5e1, #77bee8);
+    border-radius: 50%;
+}

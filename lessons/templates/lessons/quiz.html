@@ -1,0 +1,102 @@
+{% extends "lessons/layout_main.html" %}
+{% load custom_tags %}
+
+{% block title %}
+    Quiz {{ quiz_number }}
+{% endblock title %}
+
+{% block main %}
+<section id="quizDiv" class="o-pad-paper c-quiz">
+    
+    <nav class="o-pad-paper__headings">
+        <div class="o-pad-paper__headings__item">
+            <span>Quiz no.</span>
+            <div class="o-pad-paper__headings__value">{{quiz_number}}</div>
+        </div>
+        <div class="o-pad-paper__headings__item">
+            <span>Question no.</span>
+            <div class="o-pad-paper__headings__value"><span id="question-id"></span> / <span id="question-total"></span></div>
+        </div>
+    </nav>
+    
+
+    <main id="js-quiz__body">
+        <div id="questionDiv" class="c-quiz__question">
+        </div>
+
+        <div id="answersDiv" class="c-quiz__options-container">
+        </div>
+
+        <button id="skipBtn" class="c-card--lesson__next-letter-btn o-btn--arrow" title="Skip to next question">
+            <div class="o-btn--arrow__text">Skip</div>
+            <div class="o-btn--arrow__icon"></div>
+            <div class="o-btn--arrow__tip"></div>
+        </button>
+        
+    </main>
+</section>
+
+
+<section id="resultContainer" class="c-quiz--result u-hidden">
+    <div id="correctDiv" class="o-index-card-container c-quiz--result__card">
+        <main class="o-index-card c-quiz--result__card__content">
+            <header id="correctDiv-header" class="">The correct answer:</header>
+            <div id="correctDiv-body" class="">
+                <p id="kana"></p>
+                <p id="romaji"></p>
+                <p id="ex-emoji"></p>
+                <p id="ex-english"></p>
+                <p id="ex-romaji"></p>
+                <p id="ex-kana"></p>
+            </div>
+        </main>
+    </div>
+    <div id="wrongDiv" class="o-index-card-container c-quiz--result__card">
+        <main class="o-index-card c-quiz--result__card__content">
+            <header id="wrongDiv-header" class="">The correct answer:</header>
+            <div id="wrongDiv-body" class="">
+                <p id="answered-kana"></p>
+                <p id="answered-romaji"></p>
+                <p id="answered-ex-emoji"></p>
+                <p id="answered-ex-english"></p>
+                <p id="answered-ex-romaji"></p>
+                <p id="answered-ex-kana"></p>
+            </div>
+        </main>
+    </div>   
+
+    <div id="check-span" class="c-quiz--result__check-span">
+        ✅
+    </div>
+
+    <button id="nextQuestionBtn" class="c-quiz--result__next-btn o-btn--arrow" title="Next">
+        <div class="o-btn--arrow__text">Next</div>
+        <div class="o-btn--arrow__icon"></div>
+        <div class="o-btn--arrow__tip"></div>
+    </button>
+</section>
+
+
+<section id="finalScoreDiv" class="o-pad-paper c-quiz c-quiz--score u-hidden">
+    <main class="finalScoreDiv-body">
+        <header class="finalscore-header">
+            End of Quiz {{ quiz_number }}
+        </header>
+
+        <div class="finalscore-score">
+            <span id="finalScore"></span>/<span id="totalQuestions"></span>
+        </div>
+
+        <span id="finalscore-emoji"></span>
+
+        <div class="c-quiz--score__btns">
+            <a href="/study/" class="finalscore-btn"><i class="fa fa-home fa-2x"></i></a>
+            <a href="/study/{{ kana }}-{{ quiz_number|add:1 }}" class="finalscore-btn" id="nextDiv"><i class="fa fa-arrow-circle-right fa-2x"></i></a>
+            <a href="/study/{{ kana }}-{{ quiz_number }}" class="finalscore-btn" id="backDiv"><i class="fa fa-undo fa-2x"></i></a>
+        </div>
+    </main>
+
+    <div id="trophyDiv" class="c-quiz--score__trophies u-hidden"></div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "lessons/layout_menu.html" %}
+{% load custom_tags %}
+
+{% block title %}
+    Review
+{% endblock %}
+
+{% block header_text %}
+    Let's Review
+{% endblock %} 
+
+{% block content %}
+
+{% for course in lessonsDict %}
+<section class="c-card-container c-card-container--review">
+    <header class="c-card-container__header">{{ course.0 }}</header>
+
+    <section class="c-card-container__content">
+    {% if course.1 %}
+    {% for lesson in course.1|order_by:"order" %}
+        <div class="c-card--menu c-card--menu--review">
+            <div class="o-index-card-container">
+                <div class="o-index-card o-index-card--below"></div>
+                <div class="o-index-card o-index-card--below"></div>
+                <div class="o-index-card o-index-card--below"></div>
+                <main class="o-index-card o-index-card--top">
+                    <p class="c-card--menu__content">
+                        {{ lesson.order }}: {{ lesson.name }}
+                    </p>
+
+                    <a href="/review/{{ course.0.0 }}-{{ lesson.order }}">
+                        <button class="c-card--menu__link-to-lesson o-btn--arrow" title="Proceed to {{ course.0 }} lesson {{ course.1.order }}">
+                            <div class="o-btn--arrow__text">Read</div>
+                            <div class="o-btn--arrow__icon"></div>
+                            <div class="o-btn--arrow__tip"></div>
+                        </button>
+                    </a>
+                </main>
+                <div class="c-card--menu__paper-clip o-paper-clip"></div>
+            </div>
+        </div>
+    {% endfor %}
+    {% else %}
+        <div class="c-card__none">
+            <p>None</p>
+            <p>🤷‍♀️</p>
+        </div>
+    {% endif %}
+    </section>
+</section>
+{% endfor %}
+
+{% endblock %}

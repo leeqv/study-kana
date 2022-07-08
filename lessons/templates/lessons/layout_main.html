@@ -1,0 +1,117 @@
+{% extends "lessons/layout.html" %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+        <div id="go2quiz-overlay" class="c-modal-overlay u-hidden" aria-hidden="true">
+            <div id="go2quiz-dialog-box" class="c-modal-overlay__dialog-box">
+                <header>Start quiz?</header>
+                <div class="c-modal-overlay__dialog-box__btn-group">
+                    <a href="/quiz/{{ kana }}-{{ letter.lesson.order }}/"><button class="btn btn-primary">Yes</button></a>
+                    <button id="go2quiz-close" class="btn btn-secondary">No</button>
+                </div>
+            </div>
+        </div>
+
+        <header>
+            <div class="nav__title">
+                <a href="/" class="nav__logo o-site-logo" data-title="Back to Home">
+                    <i class="fa fa-book"></i>
+                </a>
+                <h1>
+                    Study Kana
+                </h1>
+            </div>
+
+            <input type="checkbox" id="toggle-nav" class="toggle-nav">
+            <label for="toggle-nav" class="c-hamburger-btn o-hamburger-btn-container" id="js-hamburger-btn">
+                <div class="hamb o-hamburger-btn" >
+                    <span></span>
+                    <span></span>
+                </div>
+            </label>
+            
+            <nav class="nav">
+                <ul class="nav__menu">
+                    <li class="nav__menu__item">
+                        <a href="/study" data-title="Study" id="menu-study">
+                            Study
+                        </a>
+                    </li>
+                    <li class="nav__menu__item">
+                        <a href="/review" data-title="Review" id="menu-review">
+                            Review
+                        </a>
+                    </li>
+                    <li class="nav__menu__item">
+                        <a href="/watchlist" data-title="Watchlist"  id="menu-watchlist">
+                            Watchlist
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav__log">
+                    <li class="nav__log__item" id="menu-profile" title="Profile" >
+                        <a href="/profile" data-title="Profile" role="button">
+                            <i class="fa fa-address-card-o"></i>
+                        </a>
+                    </li>
+                    <li class="nav__log__item">
+                        <a href="{% url 'logout' %}" data-title="Log Out" role="button">
+                            <i class="fa fa-sign-out"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+    {% else %}
+        <header class="header--logged-out--fixed" id="js-header">
+            <div class="nav__title">
+                <a href="/" class="nav__logo o-site-logo" data-title="Back to Home">
+                    <i class="fa fa-book"></i>
+                </a>
+                <h1>
+                    Study Kana
+                </h1>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{% url 'login' %}">
+                            <i class="fa fa-sign-in"></i>
+                            <p class="log-text">Log In</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'register' %}">
+                            <i class="fa fa-user-plus"></i>
+                            <p class="log-text">Register</p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <header class="header--logged-out">         
+            <ul>
+                <li>
+                    <a href="{% url 'login' %}">
+                        <i class="fa fa-sign-in"></i>
+                        Log In
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'register' %}">
+                        <i class="fa fa-user-plus"></i>
+                        Register
+                    </a>
+                </li>
+            </ul>
+        </header>
+    {% endif %}
+    
+    <main>
+        {% block main %}
+        {% endblock %}
+    </main>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "lessons/layout_log.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block form %}
+<form action="{% url 'register' %}" method="post" class="flex-column-center" autocomplete="off">
+	{% csrf_token %}
+	<div class="form-group">
+		<input class="form-control" autofocus type="text" name="username" placeholder="Username">
+	</div>
+	<div class="form-group">
+		<input class="form-control" type="email" name="email" placeholder="Email Address">
+	</div>
+	<div class="form-group">
+		<input class="form-control" type="password" name="password" placeholder="Password">
+	</div>
+	<div class="form-group">
+		<input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+	</div>
+	<input class="btn btn-primary" id="btn-log" type="submit" value="Register">
+</form>
+
+<footer>
+	Already have an account? <a href="{% url 'login' %}" class="highlighted">Log In here.</a>
+</footer>
+{% endblock %}

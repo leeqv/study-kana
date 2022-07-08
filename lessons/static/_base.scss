@@ -1,0 +1,82 @@
+/* RESETS */
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+html {
+    height: 100%;
+    font-size: 1.25rem;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+}
+
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+}
+
+p {
+    margin: 0;
+}
+
+ul, li {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+:root {
+    --darkgray: rgb(75, 75, 75);
+    --darkgray: black;
+    --darkblue: #3798c0;
+    --darkestblue: #00425d;
+    --lightgreen: #60da97;
+    --lightgreen: #79dfa7;
+}
+
+[role="button"]:hover,
+[type="button"]:hover {
+    cursor: pointer;
+}
+
+table caption {
+    padding: 0;
+    caption-side: top;
+}
+
+table {
+    text-align: center;
+}
+
+h1 {
+    padding: 0;
+    margin: 0;
+}
+
+// :is(button,
+// [type="button"],
+// [role="button"],
+// a:link):hover {
+//     cursor: pointer;
+//     filter: drop-shadow(0.0 0 0.25rem green);
+// }
+
+button:hover,
+[type="button"]:hover,
+[role="button"]:hover {
+    filter: drop-shadow(0.0 0 0.25rem orange);
+}

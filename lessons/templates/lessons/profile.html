@@ -1,0 +1,120 @@
+{% extends "lessons/layout_main.html" %}
+
+{% block title %}
+    {{ userprofile.user.username }}'s profile
+{% endblock %}
+
+{% block main %}
+<section class="section--profile">
+    
+    <section class="o-index-card-container section--profile__progress">
+        <main class="c-card--profile o-index-card o-index-card--top">
+            <div class="c-card--profile__infos">
+                <header>
+                    <span class="c-card--profile__name">{{ userprofile.user.username }}</span> lesson progress
+                </header>
+                
+                <div class="c-card--profile__progress-container o-progress-container">
+                    <label for="progress-bar-hiragana">
+                        Hiragana:
+                    </label>
+
+                    <progress2 id="progress-bar-hiragana" class="c-card--profile__progress-bar o-progress-bar" max="100" value="{{ hiragana_percent_progress|floatformat:0 }}">
+                        <div role="progressbar" id="progress-hiragana" class="o-progress-bar--fallback">
+                            <span id="bar-hiragana" class="o-progress-bar--fallback__bar" data-percent="{{ hiragana_percent_progress }}"></span>
+                        </div>
+                    </progress>
+
+                    <span class="o-progress-text">{{ hiragana_percent_progress|floatformat:0 }}%</span>
+                </div>
+
+                <div class="c-card--profile__progress-container o-progress-container">
+                    <label for="progress-bar-katakana">
+                        Katakana:
+                    </label>
+
+                    <progress2 id="progress-bar-katakana" class="c-card--profile__progress-bar o-progress-bar" max="100" value="{{ katakana_percent_progress|floatformat:0 }}">
+                        <div role="progressbar" id="progress-katakana" class="o-progress-bar--fallback">
+                            <span id="bar-katakana" class="o-progress-bar--fallback__bar" data-percent="{{ katakana_percent_progress }}"></span>
+                        </div>
+                    </progress>
+
+                    <span class="o-progress-text">{{ katakana_percent_progress|floatformat:0 }}%</span>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <section class="o-index-card-container section--profile__scores">
+        <main class="c-card--scores o-index-card o-index-card--top">
+            <header>
+                Scores
+            </header>
+             
+            <section class="c-card--scores__content">
+                <table>
+                    <caption>Hiragana</caption>
+                {% if hiragana_scores %}
+                    {% for score in hiragana_scores %}
+                        <tr>
+                            <td>{{ score.quiz.order }}</td>
+                            <td>{{ score.quiz.lesson.name }}</td>
+                            <td>{{ score.score|floatformat:0 }}%</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td>🤷‍♀️ None</td>
+                    </tr>
+                {% endif %}
+                </table>
+                
+                <table class="scoresTable">
+                    <caption>Katakana</caption>
+                {% if katakana_scores %}
+                    {% for score in katakana_scores %}
+                        <tr>
+                            <td>{{ score.quiz.order }}</td>
+                            <td>{{ score.quiz.lesson.name }}</td>
+                            <td>{{ score.score|floatformat:0 }}%</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td>🤷‍♀️ None</td>
+                    </tr>
+                {% endif %}
+                </table>
+            </section>
+        </main>
+    </section>
+    
+    <section class=" section--profile__trophies">
+        <div class="o-index-card-container c-card--trophies-container">
+            <main class="c-card--scores c-card--trophies o-index-card o-index-card--top">
+                <header>Trophies</header>
+                <span class="c-card--trophies__counter">
+                    <span class="highlighted">{{ userprofile.trophies.all|length }}</span> / {{ trophy_list|length }}
+                </span>
+                <section class="c-card--trophies__content">
+                    <table class="trophiesTable">
+                        {% for trophy in trophy_list %}
+                            <tr>
+                                <td>
+                                    {% if trophy in userprofile.trophies.all %}
+                                        🏆
+                                    {% endif %}
+                                </td>
+                                <td {% if trophy in userprofile.trophies.all %} class="highlighted" {% endif %}>
+                                    {{ trophy.name }} <i class="fa fa-info-circle trophy-info" title="{{ trophy.desc }}"></i>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </section>
+            </main>
+        </div>
+    </section>
+</section>
+
+{% endblock %}

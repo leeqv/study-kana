@@ -1,0 +1,84 @@
+{% extends "lessons/layout_menu.html" %}
+{% load custom_tags %}
+
+{% block title %}
+    Watchlist
+{% endblock %}
+
+{% block header_text %}
+    Watchlist
+{% endblock %} 
+
+{% block content %}
+<div id="alert-watchlist" class="alert--watchlist u-hidden" role="alert">
+    <span id="alert-text"></span>
+    <button type="button" id="undo-watchlist-btn">Undo</button>
+</div>
+
+{% for course in lessonsDict %}
+<section class="c-card-container c-card-container--watchlist">
+    <header class="c-card-container__header">{{ course.0 }}</header>
+    
+    <section class="c-card-container__content">
+        {% if course.1 %}
+            {% for letter in course.1 %}
+            <div id="letterDiv-{{ letter.kana }}" class="c-card--menu c-card--menu--watchlist" role="button">
+                <div class="o-pinned-memo">
+                    <div class="o-pinned-memo__paper o-pinned-memo__paper--back"></div>
+                    <a href="/study/{{ course.0.0 }}-{{ letter.lesson.order }}/{{ letter.romaji }}">
+                        <main class="o-pinned-memo__paper o-pinned-memo__paper--front">
+                            <span>{{ letter.kana }} ({{ letter.romaji }})
+                            </span>
+                            <span> {{ letter.ex_emoji }} </span>
+                            {% spaceless %}
+                            <p>
+                                {% with letter.ex_romaji|index:letter.romaji as array %}
+                                    (
+                                    {% for i in letter.ex_romaji|lower %}
+                                        {% if forloop.counter0 in array %}
+                                            <span class="u-highlighted-text">{{ i }}</span>
+                                        {% else %}
+                                            <span>{{ i }}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                    )
+                                    
+                                {% endwith %}
+                            </p>
+                            {% endspaceless %}
+                            {% spaceless %}
+                            <p>
+                                {% for syllable in letter.ex_kana %}
+                                    {% if syllable == letter.kana %}
+                                        <span class="u-highlighted-text">{{ syllable }}</span>
+                                    {% else %}
+                                        <span>{{ syllable }}</span>
+                                    {% endif %}
+                                {% endfor %}
+                            </p>
+                            {% endspaceless %}
+                        </main>
+                    </a>
+                    <div class="o-pinned-memo__pin">
+                        <div class="o-pinned-memo__pin__body"></div>
+                        <button class="o-pinned-memo__pin__head js-watchlist-btn" title="Remove from watchlist" data-letter="{{ letter.kana }}">❌</button>
+                    </div>
+                </div>
+                
+            </div>
+
+            {% endfor %}
+        {% else %}
+            <div class="c-card__none">
+                <p>None</p>
+                <p>🤷‍♀️</p>
+            </div>
+        {% endif %}
+    </section>
+</section>
+
+
+{% endfor %}
+
+
+{% endblock %}

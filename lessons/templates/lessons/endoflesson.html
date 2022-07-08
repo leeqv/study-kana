@@ -1,0 +1,63 @@
+{% extends "lessons/layout_main.html" %}
+{% load custom_tags %}
+
+{% block title %}
+    {{ lesson.name }}
+{% endblock %}
+
+{% block main %}
+<section class="section--lesson">
+
+    <div class="o-index-card-container">
+        <div class="c-card--letter c-card--letter--end o-index-card">
+            <p style="text-align: center;">All {{ lesson.name }} letters done</p>
+            <table>
+                <tr>
+                    {% for item in lesson.get_letters %}
+                        <td>
+                            <a href="/study/{{ kana }}-{{ lesson.order }}/{{ item.romaji }}" role="button" class="o-btn--round">
+                                {{ item.kana }}
+                            </a>
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for item in lesson.get_letters %}
+                        <td style="text-align: center">
+                            {{ item.romaji }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            </table>
+            {% if lesson == current_lesson %}
+                <a href="/quiz/{{ kana }}-{{ lesson.order }}/" class="">
+                    <button class="c-card--lesson__next-letter-btn o-btn--arrow" title="Start Quiz">
+                        <div class="o-btn--arrow__text">Quiz</div>
+                        <div class="o-btn--arrow__icon"></div>
+                        <div class="o-btn--arrow__tip"></div>
+                    </button>
+                </a>
+            {% endif %}
+        </div>
+
+
+        <!-- Prev letter BTN -->
+        {% with lesson_letters|length as index_end and index_end|add:"-1" as index_start %}
+            {% with index_start|addstr:":"|addstr:index_end as last_letter_slice %}
+                <a href="/study/{{ kana }}-{{ lesson.order }}/{{ lesson_letters|slice:last_letter_slice|join:'' }}/">
+                    <button class="c-card--lesson__prev-letter-btn o-btn--arrow o-btn--arrow--left" title="See previous letter">
+                        <div class="o-btn--arrow__text">Prev</div>
+                        <div class="o-btn--arrow__icon"></div>
+                        <div class="o-btn--arrow__tip"></div>
+                    </button>
+                </a>
+            {% endwith %}
+        {% endwith %}
+        
+        
+    </div>
+
+</section>
+
+
+{% endblock %}

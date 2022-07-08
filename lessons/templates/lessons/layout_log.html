@@ -1,0 +1,17 @@
+{% extends "lessons/layout.html" %}
+{% block body %}
+    <main class="content c-sign-body">
+        {% if message %}
+            <div class="alert alert-primary c-log-alert">{{ message }}</div>
+        {% endif %}
+        <div class="c-sign-div">
+            <nav class="nav__title">
+                <a href="/" data-title="Back to Home" class="nav__logo o-site-logo"> 
+                    <i class="fa fa-book"></i>
+                </a>
+            </nav>
+            {% block form %}
+            {% endblock %}
+        </div>
+    </main>
+{% endblock %}
