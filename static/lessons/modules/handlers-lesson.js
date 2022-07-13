@@ -15,6 +15,10 @@ function newLessonHandler() {
     addQuizPromptBtnListener();
 }
 
+function endOfLessonHandler() {
+    highlightNavMenu();
+}
+
 function addStrokeOrderListener() {
     const showStrokeBtn = document.getElementById('showStrokeBtn'),
         hideStrokeBtn = document.getElementById('hideStrokeBtn'),
@@ -54,4 +58,4 @@ function addQuizPromptBtnListener() {
     });
 }
 
-export { oldLessonHandler, newLessonHandler };
+export { oldLessonHandler, newLessonHandler, endOfLessonHandler };

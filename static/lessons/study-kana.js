@@ -3,7 +3,7 @@ import { getSectionName } from "./modules/helpers-others.js";
 import { quizHandler } from "./modules/handler-quiz.js";
 import { profileHandler } from "./modules/handler-profile.js";
 import { studyMenuHandler, reviewMenuHandler, watchlistMenuHandler } from "./modules/handlers-menu.js";
-import { oldLessonHandler, newLessonHandler } from "./modules/handlers-lesson.js";
+import { oldLessonHandler, newLessonHandler, endOfLessonHandler } from "./modules/handlers-lesson.js";
 import { aboutPageHandler } from "./modules/handler-about.js";
 
 var studyKana = {};
@@ -14,6 +14,7 @@ var studyKana = {};
         reviewMenu: reviewMenuHandler,
         oldLesson: oldLessonHandler,
         newLesson: newLessonHandler,
+        endOfLesson: endOfLessonHandler,
         // sections
         about: aboutPageHandler,
         watchlist: watchlistMenuHandler,
@@ -27,6 +28,7 @@ window.addEventListener('load', function(){
     var subsection = {
         [/\/(review)\/[HK]-[\d]+\/[\w]+(\/)?/.test(pathname)]: 'oldLesson',
         [/\/(study)\/[HK]-[\d]+\/[\w]+(\/)?/.test(pathname)]: 'newLesson',
+        [/\/(study)\/[HK]-[\d]+\/fin(\/)?/.test(pathname)]: 'endOfLesson',
         [/^\/(study)+(\/)?$/.test(pathname)]: 'studyMenu',
         [/^\/(review)+(\/)?$/.test(pathname)]: 'reviewMenu',
     }
